@@ -1,0 +1,9 @@
+##server相关信息
+server:
+  port: 8080
+  servlet:
+    context-path: /zookeeper-study
+##zookeeper先关信息
+zookeeper:
+  zkurl: 127.0.0.1:2181
+  sessionTimeOut : 15000

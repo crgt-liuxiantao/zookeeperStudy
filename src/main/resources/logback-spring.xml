@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!--<include resource="org/springframework/boot/logging/logback/base.xml"/>-->
+
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%date %highlight([%level]) %boldYellow([%thread]) %cyan(%logger{32}) %msg%n"/>
+    <property name="LOG_PATH"
+              value="./logs"/>
+
+    <!--标准输出-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="DEFAULT-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/zookeeperStudy.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${LOG_PATH}/default.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 50MB -->
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!--keep 30 days' worth of history-->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                <charset>UTF-8</charset>
+                <pattern>%-5level - %msg%n</pattern>
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <logger name="defaultLog" level="info" additivity="false">
+    <!--        <appender-ref ref="STDOUT"/>-->
+        <appender-ref ref="DEFAULT-FILE"/>
+    </logger>
+
+    <!-- By default, the level of the root level is set to INFO -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="DEFAULT-FILE"/>
+    </root>
+
+</configuration>
+
