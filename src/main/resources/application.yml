@@ -1,6 +1,6 @@
 ##server相关信息
 server:
-  port: 8080
+  port: 8233
   servlet:
     context-path: /zookeeper-study
 ##zookeeper先关信息

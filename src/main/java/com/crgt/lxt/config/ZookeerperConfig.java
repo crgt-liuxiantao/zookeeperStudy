@@ -20,10 +20,10 @@ import java.io.IOException;
 public class ZookeerperConfig {
 
     @Value("${zookeeper.zkurl}")
-    private String zkUrl;
+    public String zkUrl;
 
     @Value("${zookeeper.sessionTimeOut}")
-    private Integer sessionTimeOut;
+    public Integer sessionTimeOut;
 
     @Bean("watch")
     public Watcher getWatch() {
