@@ -1,5 +1,9 @@
 package com.crgt.lxt.config;
 
+import org.apache.curator.RetryPolicy;
+import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.CuratorFrameworkFactory;
+import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
@@ -40,5 +44,11 @@ public class ZookeerperConfig {
         return new ZooKeeper(zkUrl,sessionTimeOut,watcher);
     }
 
-
+    @Bean
+    public CuratorFramework getCuratorFramework() {
+       // RetryPolicy retryPolicy = ;
+        RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 5);
+        CuratorFramework curatorFrameWork = CuratorFrameworkFactory.newClient(zkUrl,retryPolicy);
+        return curatorFrameWork;
+    }
 }
